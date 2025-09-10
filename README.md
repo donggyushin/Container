@@ -42,6 +42,15 @@ extension Container {
 }
 ```
 
+### Usage
+```swift
+
+class ViewModel {
+    @Injected(\.repository) private var repository
+}
+
+```
+
 ## Requirements
 
 - iOS 13.0+
