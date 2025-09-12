@@ -12,7 +12,7 @@ public struct Injected<T> {
     private let keyPath: KeyPath<Container, Factory<T>>
     
     public var wrappedValue: T {
-        Container.shared[keyPath: keyPath].wrappedValue
+        Container.shared[keyPath: keyPath]()
     }
     
     public init(_ keyPath: KeyPath<Container, Factory<T>>) {

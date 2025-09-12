@@ -54,4 +54,8 @@ public struct Factory<T> {
             }
         }
     }
+    
+    public func callAsFunction() -> T {
+        return wrappedValue
+    }
 }
