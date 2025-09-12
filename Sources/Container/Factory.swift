@@ -10,17 +10,24 @@ import Foundation
 public struct Factory<T> {
     private let container: Container
     private let factory: () -> T
-    private var scope: Container.Scope = .unique
+    private var scope: Container.Scope
     private var previewFactory: (() -> T)?
     
     init(container: Container, factory: @escaping () -> T) {
         self.container = container
         self.factory = factory
+        self.scope = container.defaultScope
     }
     
     public var shared: Factory<T> {
         var copy = self
         copy.scope = .shared
+        return copy
+    }
+    
+    public var unique: Factory<T> {
+        var copy = self
+        copy.scope = .unique
         return copy
     }
     
@@ -35,7 +42,7 @@ public struct Factory<T> {
             return previewFactory!()
         }
         
-        if scope == .unique {
+        if self.scope == .unique {
             return factory()
         } else {
             if let shared = container.sharedObjectStorage["\(T.self)"] as? T {
@@ -48,4 +55,3 @@ public struct Factory<T> {
         }
     }
 }
-

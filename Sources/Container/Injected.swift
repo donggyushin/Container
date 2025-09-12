@@ -9,13 +9,13 @@ import Foundation
 
 @propertyWrapper
 public struct Injected<T> {
-    private let keyPath: KeyPath<Container, T>
+    private let keyPath: KeyPath<Container, Factory<T>>
     
     public var wrappedValue: T {
-        Container.shared[keyPath: keyPath]
+        Container.shared[keyPath: keyPath].wrappedValue
     }
     
-    public init(_ keyPath: KeyPath<Container, T>) {
+    public init(_ keyPath: KeyPath<Container, Factory<T>>) {
         self.keyPath = keyPath
     }
 }

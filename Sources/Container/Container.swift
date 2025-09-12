@@ -4,6 +4,9 @@
 import Foundation
 
 public final class Container {
+    
+    public var defaultScope: Scope = .shared
+    
     var isPreview: Bool = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     var isTest: Bool = {
         var testing = false
