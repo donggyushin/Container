@@ -4,7 +4,7 @@ A Swift Package for a modern approach to Service Locator for Swift and SwiftUI.
 
 ## About
 
-Container is inspired by the excellent [Factory](https://github.com/hmlongco/Factory) library, but designed as a lightweight alternative. This library focuses on simplicity while providing essential dependency injection features with fluent API and automatic mock injection for previews and tests. Thank you for [Rob-Yoo](https://github.com/Rob-Yoo)
+Container is inspired by the excellent [Factory](https://github.com/hmlongco/Factory) library, but designed as a lightweight alternative. This library focuses on simplicity while providing essential dependency injection features with fluent API and automatic mock injection for previews and tests. Thank you for [Rob-Yoo](https://github.com/Rob-Yoo)!
 
 ## Installation
 
