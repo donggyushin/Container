@@ -43,16 +43,27 @@ public struct Factory<T> {
         
         let scope = self.scope ?? container.defaultScope
         
-        if scope == .unique {
-            return factory()
-        } else {
+        if scope == .shared {
+            if let weakWrapper = container.sharedObjectStorage["\(T.self)"] as? WeakWrapper {
+                if let shared = weakWrapper.value as? T {
+                    return shared
+                }
+            }
+            
             if let shared = container.sharedObjectStorage["\(T.self)"] as? T {
                 return shared
-            } else {
-                let newInstance = factory()
-                container.sharedObjectStorage["\(T.self)"] = newInstance
-                return newInstance
             }
+            
+            let newInstance = factory()
+            let objectInstance = newInstance as AnyObject
+            
+            container.sharedObjectStorage["\(T.self)"] = WeakWrapper(value: objectInstance)
+            
+            return newInstance
+        } else if scope == .unique {
+            return factory()
+        } else {
+            return factory()
         }
     }
     
