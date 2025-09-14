@@ -5,7 +5,7 @@ A Swift Package for a modern approach to Service Locator for Swift and SwiftUI.
 ## About
 
 Container is inspired by the excellent [Factory](https://github.com/hmlongco/Factory) library, but designed as a lightweight alternative. This library focuses on simplicity while providing essential dependency injection features with fluent API and automatic mock injection for previews and tests. 
-[Rob-Yoo](https://github.com/Rob-Yoo) gives me strong inspiration that how to manage single tone instance when reference count is 0. Thank you for your advice :)
+[Rob-Yoo](https://github.com/Rob-Yoo) gives me strong inspiration that how to manage singleton instance when reference count is 0. Thank you for your advice :)
 
 ## Installation
 
