@@ -44,7 +44,7 @@ public struct Factory<T> {
         let scope = self.scope ?? container.defaultScope
         
         if scope == .shared {
-            return container.storageQueue.sync(flags: .barrier) {
+            return container.storageQueue.sync {
                 // Double-check if instance already exists after acquiring lock
                 if let weakWrapper = container.sharedObjectStorage["\(T.self)"] as? WeakWrapper {
                     if let shared = weakWrapper.value as? T {
