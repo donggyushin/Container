@@ -44,28 +44,31 @@ public struct Factory<T> {
         let scope = self.scope ?? container.defaultScope
         
         if scope == .shared {
-            if let weakWrapper = container.sharedObjectStorage["\(T.self)"] as? WeakWrapper {
-                if let shared = weakWrapper.value as? T {
+            return container.storageQueue.sync(flags: .barrier) {
+                // Double-check if instance already exists after acquiring lock
+                if let weakWrapper = container.sharedObjectStorage["\(T.self)"] as? WeakWrapper {
+                    if let shared = weakWrapper.value as? T {
+                        return shared
+                    }
+                }
+
+                if let shared = container.sharedObjectStorage["\(T.self)"] as? T {
                     return shared
                 }
+
+                let newInstance = factory()
+
+                // Only use WeakWrapper for reference types to avoid type casting issues
+                if type(of: newInstance) is AnyClass {
+                    let objectInstance = newInstance as AnyObject
+                    container.sharedObjectStorage["\(T.self)"] = WeakWrapper(value: objectInstance)
+                } else {
+                    // Store value types directly
+                    container.sharedObjectStorage["\(T.self)"] = newInstance
+                }
+
+                return newInstance
             }
-
-            if let shared = container.sharedObjectStorage["\(T.self)"] as? T {
-                return shared
-            }
-
-            let newInstance = factory()
-
-            // Only use WeakWrapper for reference types to avoid type casting issues
-            if type(of: newInstance) is AnyClass {
-                let objectInstance = newInstance as AnyObject
-                container.sharedObjectStorage["\(T.self)"] = WeakWrapper(value: objectInstance)
-            } else {
-                // Store value types directly
-                container.sharedObjectStorage["\(T.self)"] = newInstance
-            }
-
-            return newInstance
         } else if scope == .unique {
             return factory()
         } else {

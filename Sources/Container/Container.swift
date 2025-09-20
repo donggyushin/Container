@@ -21,6 +21,7 @@ public final class Container {
     
     nonisolated(unsafe) public static let shared = Container()
     var sharedObjectStorage: [String: Any] = [:]
+    internal let storageQueue = DispatchQueue(label: "container.storage", attributes: .concurrent)
     
     private init() {}
     

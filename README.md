@@ -4,7 +4,7 @@ A Swift Package for a modern approach to Service Locator for Swift and SwiftUI.
 
 ## About
 
-Container is inspired by the excellent [Factory](https://github.com/hmlongco/Factory) library, but designed as a lightweight alternative. This library focuses on simplicity while providing essential dependency injection features with fluent API and automatic mock injection for previews and tests. 
+Container is inspired by the excellent [Factory](https://github.com/hmlongco/Factory) library, but designed as a lightweight alternative. This library focuses on simplicity while providing essential dependency injection features with fluent API and automatic mock injection for previews and tests.
 [Rob-Yoo](https://github.com/Rob-Yoo) gives me strong inspiration that how to manage singleton instance when reference count is 0. Thank you for your advice :)
 
 ## Installation
@@ -21,7 +21,7 @@ Or add it to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/donggyushin/Container", from: "1.3.1")
+    .package(url: "https://github.com/donggyushin/Container", from: "1.3.2")
 ]
 ```
 
@@ -66,7 +66,7 @@ Use the `@Injected` property wrapper for clean dependency injection:
 ```swift
 class ViewModel: ObservableObject {
     @Injected(\.repository) private var repository
-    
+
     func loadData() {
         let data = repository.fetchData()
         // Use data...
