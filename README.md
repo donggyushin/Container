@@ -21,7 +21,7 @@ Or add it to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/donggyushin/Container", from: "1.3.0")
+    .package(url: "https://github.com/donggyushin/Container", from: "1.3.1")
 ]
 ```
 
